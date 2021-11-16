@@ -1,6 +1,7 @@
 const tiempoEl = document.getElementById("tiempo");
 const fechaEl = document.getElementById("fecha");
 const meteoactualEl = document.getElementById("elementos-tiempo-actual");
+const lugarubicacion = document.getElementById("lugar-ubicacion");
 const zonahoraria = document.getElementById("zona-horaria");
 const paisEl = document.getElementById("pais");
 const previsionTiempoEl = document.getElementById("prevision-tiempo");
@@ -78,56 +79,69 @@ function getWeatherData() {
 
 function setWeatherBackground(atmosphere) {
   switch (atmosphere) {
-    case 'Thunderstorm':
-        document.body.style.backgroundImage  = "";
+    case "Thunderstorm":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Drizzle':
-        document.body.style.backgroundImage  = "";
+    case "Drizzle":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Rain':
-        document.body.style.backgroundImage  = "";
+    case "Rain":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Snow':
-        document.body.style.backgroundImage  = "";
+    case "Snow":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Mist':
-        document.body.style.backgroundImage  = "";
+    case "Mist":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Smoke':
-        document.body.style.backgroundImage  = "";
+    case "Smoke":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Haze':
-        document.body.style.backgroundImage  = "";
+    case "Haze":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Dust':
-        document.body.style.backgroundImage  = "";
+    case "Dust":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Fog':
-        document.body.style.backgroundImage  = "";
+    case "Fog":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Sand':
-        document.body.style.backgroundImage  = "";
+    case "Sand":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Ash':
-        document.body.style.backgroundImage  = "";
+    case "Ash":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Squall':
-        document.body.style.backgroundImage  = "";
+    case "Squall":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Tornado':
-        document.body.style.backgroundImage  = "";
+    case "Tornado":
+      document.body.style.backgroundImage = "";
       break;
-    case 'Clear':
-        document.body.style.backgroundImage  = "url('https://wallpapercave.com/wp/2khKQyP.jpg')";
+    case "Clear":
+      document.body.style.backgroundImage =
+        "url('https://wallpapercave.com/wp/2khKQyP.jpg')";
       break;
-    case 'Clouds':
-        document.body.style.backgroundImage  = "url('https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg')";
+    case "Clouds":
+      document.body.style.backgroundImage =
+        "url('https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg')";
       break;
-  
+
     default:
       break;
   }
   // document.body.style.backgroundImage  = "url(`${atmosphere[atmos]}`)";
+}
+
+function setLocation(latitude, longitude) {
+  fetch(
+    `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
+  )
+    .then((res) => res.json())
+    .then((resdata) => {
+      console.log(resdata)
+      lugarubicacion.innerHTML = resdata[0].name;
+    });
 }
 
 function showWeatherData(data) {
@@ -139,9 +153,8 @@ function showWeatherData(data) {
     wind_speed: velViento,
   } = data.current;
 
-  console.log(data);
-
   setWeatherBackground(data.current.weather[0].main);
+  setLocation(data.lat, data.lon);
   zonahoraria.innerHTML = data.timezone;
   paisEl.innerHTML = data.lat + "N " + data.lon + "E";
 
@@ -183,8 +196,12 @@ function showWeatherData(data) {
           }@2x.png" alt="icon-tiempo" class="icon-t">
           <div class="otro">
               <div class="dia">HOY</div>
-              <div class="temp">Noche - ${Math.round(day.temp.night)} &#176;C</div>
-              <div class="temp">Día -   ${Math.round(day.temp.day)} &#176;C</div>
+              <div class="temp">Noche - ${Math.round(
+                day.temp.night
+              )} &#176;C</div>
+              <div class="temp">Día -   ${Math.round(
+                day.temp.day
+              )} &#176;C</div>
           </div>
         `;
     } else {
@@ -196,7 +213,9 @@ function showWeatherData(data) {
             <img src="http://openweathermap.org/img/wn/${
               day.weather[0].icon
             }@2x.png" alt="icon-tiempo" class="icon-t">
-            <div class="temp">Noche - ${Math.round(day.temp.night)} &#176;C</div>
+            <div class="temp">Noche - ${Math.round(
+              day.temp.night
+            )} &#176;C</div>
             <div class="temp">Dia -   ${Math.round(day.temp.day)} &#176;C</div>
           </div>
         `;
