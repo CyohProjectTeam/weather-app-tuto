@@ -85,6 +85,7 @@ function showWeatherData(data) {
     wind_speed: velViento,
   } = data.current;
 
+  console.log(data);
   zonahoraria.innerHTML = data.timezone;
   paisEl.innerHTML = data.lat + "N " + data.lon + "E";
 
