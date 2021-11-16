@@ -129,7 +129,7 @@ function showWeatherData(data) {
                 diasPrevision[window.moment(day.dt * 1000).format("ddd")]
               }</div>
               <div class="temp">Noche - ${day.temp.night} &#176;C</div>
-              <div class="temp">Día - ${day.temp.day} &#176;C</div>
+              <div class="temp">Día -   ${day.temp.day} &#176;C</div>
           </div>
         `;
     } else {
@@ -142,7 +142,7 @@ function showWeatherData(data) {
               day.weather[0].icon
             }@2x.png" alt="icon-tiempo" class="icon-t">
             <div class="temp">Noche - ${day.temp.night} &#176;C</div>
-            <div class="temp">Dia -  ${day.temp.day} &#176;C</div>
+            <div class="temp">Dia -   ${day.temp.day} &#176;C</div>
           </div>
         `;
     }

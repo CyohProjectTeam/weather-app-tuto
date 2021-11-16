@@ -100,12 +100,15 @@ body {
   padding-right: 40px;
   border-radius: 10px;
   /* background: rgba(0, 0, 0, 0.2); */
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .prevision-futura .hoy .dia {
   padding: 5px 22px;
-  background: #3c3c44;
+  /* background: #3c3c44; */
+  background: mistyrose;
+  color: navy;
+  font-weight: bold;
   border-radius: 50px;
   text-align: center;
 }
@@ -129,12 +132,15 @@ body {
   padding: 15px;
   border-radius: 10px;
   /* background: rgba(0, 0, 0, 0.2); */
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .prevision-tiempo .elem-prevision-tiempo .dia {
   padding: 5px 15px;
-  background: #3c3c44;
+  /* background: #3c3c44; */
+  background: mistyrose;
+  color: navy;
+  font-weight: bold;
   border-radius: 50px;
   text-align: center;
 }
@@ -165,7 +171,7 @@ body {
   /* .prevision-futura .hoy .temp {
     font-size: 23px;
   } // queda bien el que viene de base (16px) */
-
+  
   /* .fecha-container .tiempo {
     font-size: 80px;
   } */
@@ -183,16 +189,18 @@ body {
   }
 }
 
-@media only screen and (max-width: 1000px) {
+/* @media only screen and (max-width: 1000px) {
   .prevision-futura {
     justify-content: start;
     align-items: none;
     overflow-x: scroll;
   }
-}
+} */
 
-@media only screen and (max-width: 1260px) {
+@media only screen and (max-width: 1280px) {
   .prevision-futura {
+    justify-content: start;
+    align-items: none;
     overflow-x: scroll;
   }
 }
