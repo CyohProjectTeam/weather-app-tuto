@@ -76,6 +76,60 @@ function getWeatherData() {
   });
 }
 
+function setWeatherBackground(atmosphere) {
+  switch (atmosphere) {
+    case 'Thunderstorm':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Drizzle':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Rain':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Snow':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Mist':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Smoke':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Haze':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Dust':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Fog':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Sand':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Ash':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Squall':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Tornado':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Clear':
+        document.body.style.backgroundImage  = "";
+      break;
+    case 'Clouds':
+        document.body.style.backgroundImage  = "url('https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg')";
+      break;
+  
+    default:
+      break;
+  }
+  // document.body.style.backgroundImage  = "url(`${atmosphere[atmos]}`)";
+}
+
 function showWeatherData(data) {
   let {
     humidity: humedad,
@@ -86,6 +140,8 @@ function showWeatherData(data) {
   } = data.current;
 
   console.log(data);
+
+  setWeatherBackground(data.current.weather[0].main);
   zonahoraria.innerHTML = data.timezone;
   paisEl.innerHTML = data.lat + "N " + data.lon + "E";
 
