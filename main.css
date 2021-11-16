@@ -7,7 +7,7 @@
 }
 
 body {
-  background: url("https://images.unsplash.com/photo-1621274403997-37aace184f49?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1");
+  background: url("https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -31,16 +31,20 @@ body {
 }
 
 .fecha-container .tiempo {
-  font-size: 70px;
+  font-size: 56px;
 }
 
 .fecha-container #am-pm {
-  font-size: 30px;
+  font-size: 22px;
   margin-left: 20px;
 }
 
 .fecha-container .fecha {
-  font-size: 30px;
+  font-size: 24px;
+}
+
+.fecha-container .otros .elem-tiempo #elem-tiempo-valor {
+  padding-left: 40px;
 }
 
 .lugar-container {
@@ -65,7 +69,6 @@ body {
   border-radius: 10px;
   margin: 10px 0;
   border: 1px solid #eee;
-  
 }
 
 .info-actual .otros .elem-tiempo {
@@ -123,7 +126,7 @@ body {
   border: 1px solid #eee;
   padding: 15px;
   border-radius: 10px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .prevision-tiempo .elem-prevision-tiempo .dia {
@@ -138,20 +141,27 @@ body {
   font-size: 12px;
 }
 
+@media only screen and (max-width: 396px) {
+  .zona-horaria,
+  .pais {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 730px) {
   .container {
     padding: 20px;
   }
 
-  .prevision-futura {
+  /* .prevision-futura {
     justify-content: start;
     align-items: none;
     overflow-x: scroll;
-  }
+  } */
 
   /* .prevision-futura .hoy .temp {
     font-size: 23px;
-  } // queda bien el que viene de base (16px) */ 
+  } // queda bien el que viene de base (16px) */
 
   .fecha-container .tiempo {
     font-size: 50px;
@@ -174,6 +184,12 @@ body {
   .prevision-futura {
     justify-content: start;
     align-items: none;
+    overflow-x: scroll;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .prevision-futura {
     overflow-x: scroll;
   }
 }
