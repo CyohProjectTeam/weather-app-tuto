@@ -139,7 +139,6 @@ function setLocation(latitude, longitude) {
   )
     .then((res) => res.json())
     .then((resdata) => {
-      console.log(resdata)
       lugarubicacion.innerHTML = resdata[0].name;
     });
 }
