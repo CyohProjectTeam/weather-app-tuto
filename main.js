@@ -52,9 +52,9 @@ setInterval(() => {
   const ampm = hora >= 12 ? "PM" : "AM";
 
   tiempoEl.innerHTML =
-    (horasFormato12 <= 10 ? "0" + horasFormato12 : horasFormato12) +
+    (horasFormato12 < 10 ? "0" + horasFormato12 : horasFormato12) +
     ":" +
-    (minutos <= 10 ? "0" + minutos : minutos) +
+    (minutos < 10 ? "0" + minutos : minutos) +
     `<span id="am-pm">${ampm}</span>`;
 
   fechaEl.innerHTML = dias[dia] + ", " + fecha + " " + meses[mes];
