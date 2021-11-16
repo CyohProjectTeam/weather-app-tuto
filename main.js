@@ -118,7 +118,7 @@ function setWeatherBackground(atmosphere) {
         document.body.style.backgroundImage  = "";
       break;
     case 'Clear':
-        document.body.style.backgroundImage  = "";
+        document.body.style.backgroundImage  = "url('https://wallpapercave.com/wp/2khKQyP.jpg')";
       break;
     case 'Clouds':
         document.body.style.backgroundImage  = "url('https://www.cambridge.org/elt/blog/wp-content/uploads/2019/02/background-3268840_1920.jpg')";
@@ -182,11 +182,9 @@ function showWeatherData(data) {
             day.weather[0].icon
           }@2x.png" alt="icon-tiempo" class="icon-t">
           <div class="otro">
-              <div class="dia">${
-                diasPrevision[window.moment(day.dt * 1000).format("ddd")]
-              }</div>
-              <div class="temp">Noche - ${day.temp.night} &#176;C</div>
-              <div class="temp">Día -   ${day.temp.day} &#176;C</div>
+              <div class="dia">HOY</div>
+              <div class="temp">Noche - ${Math.round(day.temp.night)} &#176;C</div>
+              <div class="temp">Día -   ${Math.round(day.temp.day)} &#176;C</div>
           </div>
         `;
     } else {
@@ -198,8 +196,8 @@ function showWeatherData(data) {
             <img src="http://openweathermap.org/img/wn/${
               day.weather[0].icon
             }@2x.png" alt="icon-tiempo" class="icon-t">
-            <div class="temp">Noche - ${day.temp.night} &#176;C</div>
-            <div class="temp">Dia -   ${day.temp.day} &#176;C</div>
+            <div class="temp">Noche - ${Math.round(day.temp.night)} &#176;C</div>
+            <div class="temp">Dia -   ${Math.round(day.temp.day)} &#176;C</div>
           </div>
         `;
     }
