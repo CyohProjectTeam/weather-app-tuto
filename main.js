@@ -1,53 +1,62 @@
-const timeEl = document.getElementById("time");
-const dateEl = document.getElementById("date");
-const currentWeatherItemEl = document.getElementById("current-weather-items");
-const timezone = document.getElementById("time-zone");
-const countryEl = document.getElementById("country");
-const weatherForecastEl = document.getElementById("weather-forecast");
-const currentTempEl = document.getElementById("current-temp");
+const tiempoEl = document.getElementById("tiempo");
+const fechaEl = document.getElementById("fecha");
+const meteoactualEl = document.getElementById("elementos-tiempo-actual");
+const zonahoraria = document.getElementById("zona-horaria");
+const paisEl = document.getElementById("pais");
+const previsionTiempoEl = document.getElementById("prevision-tiempo");
+const tempActualEl = document.getElementById("temp-actual");
 
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+const dias = [
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
 ];
-const months = [
-  "Jan",
+const diasPrevision = {
+  'Sun': 'Dom',
+  'Mon': 'Lun',
+  'Tue': 'Mar',
+  'Wed': 'Mié',
+  'Thu': 'Jue',
+  'Fri': 'Vie',
+  'Sat': 'Sáb'
+};
+const meses = [
+  "Ene",
   "Feb",
   "Mar",
-  "Apr",
+  "Abr",
   "May",
   "Jun",
   "Jul",
-  "Aug",
+  "Ago",
   "Sep",
   "Oct",
   "Nov",
-  "Dec",
+  "Dic",
 ];
 
 const API_KEY = "16f6b86543568463c043d3d800017583";
 
 setInterval(() => {
-  const time = new Date();
-  const month = time.getMonth();
-  const date = time.getDate();
-  const day = time.getDay();
-  const hour = time.getHours();
-  const hoursIn12hFormat = hour >= 12 ? hour % 12 : hour;
-  const minutes = time.getMinutes();
-  const ampm = hour >= 12 ? "PM" : "AM";
+  const tiempo = new Date();
+  const mes = tiempo.getMonth();
+  const fecha = tiempo.getDate();
+  const dia = tiempo.getDay();
+  const hora = tiempo.getHours();
+  const horasFormato12 = hora >= 12 ? hora % 12 : hora;
+  const minutos = tiempo.getMinutes();
+  const ampm = hora >= 12 ? "PM" : "AM";
 
-  timeEl.innerHTML =
-    (hoursIn12hFormat <= 10 ? '0' + hoursIn12hFormat : hoursIn12hFormat) + ":" + 
-    (minutes <= 10 ? '0' + minutes : minutes) +
+  tiempoEl.innerHTML =
+    (horasFormato12 <= 10 ? '0' + horasFormato12 : horasFormato12) + ":" + 
+    (minutos <= 10 ? '0' + minutos : minutos) +
     `<span id="am-pm">${ampm}</span>`;
 
-  dateEl.innerHTML = days[day] + ", " + date + " " + months[month];
+  fechaEl.innerHTML = dias[dia] + ", " + fecha + " " + meses[mes];
 }, 1000);
 
 getWeatherData();
@@ -61,65 +70,64 @@ function getWeatherData() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         showWeatherData(data);
       });
   });
 }
 
 function showWeatherData(data) {
-  let { humidity, pressure, sunrise, sunset, wind_speed } = data.current;
+  let { humidity: humedad, pressure: presion, sunrise: amanecer, sunset: anochecer, wind_speed: velViento } = data.current;
 
-  timezone.innerHTML = data.timezone;
-  countryEl.innerHTML = data.lat + 'N ' + data.lon + 'E';
+  zonahoraria.innerHTML = data.timezone;
+  paisEl.innerHTML = data.lat + 'N ' + data.lon + 'E';
 
-  currentWeatherItemEl.innerHTML = `<div class="weather-item">
-        <p>Humidity</p>
-        <p>${humidity} %</p>
+  meteoactualEl.innerHTML = `<div class="elem-tiempo">
+        <p>Humedad</p>
+        <p>${humedad} %</p>
     </div>
 
-    <div class="weather-item">
-        <p>Pressure</p>
-        <p>${pressure}</p>
+    <div class="elem-tiempo">
+        <p>Presión</p>
+        <p>${presion}</p>
     </div>
 
-    <div class="weather-item">
-        <p>Wind Speed</p>
-        <p>${wind_speed}</p>
+    <div class="elem-tiempo">
+        <p>Velocidad viento</p>
+        <p>${velViento}</p>
     </div>
 
-    <div class="weather-item">
-        <p>Sunrise</p>
-        <p>${window.moment(sunrise * 1000).format("HH:mm a")}</p>
+    <div class="elem-tiempo">
+        <p>Amanacer</p>
+        <p>${window.moment(amanecer * 1000).format("HH:mm a")}</p>
     </div>
 
-    <div class="weather-item">
-        <p>Sunset</p>
-        <p>${window.moment(sunset * 1000).format("HH:mm a")}</p>
+    <div class="elem-tiempo">
+        <p>Anochecer</p>
+        <p>${window.moment(anochecer * 1000).format("HH:mm a")}</p>
     </div>`;
 
-    let otherDayForecast = '';
+    let previsionRestoDias = '';
     data.daily.forEach((day, idx) => {
       if(idx == 0) {
-        currentTempEl.innerHTML = `
-          <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather-icon" class="w-icon">
-          <div class="other">
-              <div class="day">Mon</div>
-              <div class="temp">Night - ${day.temp.night} &#176;C</div>
-              <div class="temp">Day - ${day.temp.day} &#176;C</div>
+        tempActualEl.innerHTML = `
+          <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="icon-tiempo" class="icon-t">
+          <div class="otro">
+              <div class="dia">${diasPrevision[window.moment(day.dt*1000).format('ddd')]}</div>
+              <div class="temp">Noche - ${day.temp.night} &#176;C</div>
+              <div class="temp">Día - ${day.temp.day} &#176;C</div>
           </div>
         `;
       }else{
-        otherDayForecast += `
-          <div class="weather-forecast-item">
-            <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
-            <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather-icon" class="w-icon">
-            <div class="temp">Night - ${day.temp.night} &#176;C</div>
-            <div class="temp">Day -  ${day.temp.day} &#176;C</div>
+        previsionRestoDias += `
+          <div class="elem-prevision-tiempo">
+            <div class="dia">${diasPrevision[window.moment(day.dt*1000).format('ddd')]}</div>
+            <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="icon-tiempo" class="icon-t">
+            <div class="temp">Noche - ${day.temp.night} &#176;C</div>
+            <div class="temp">Dia -  ${day.temp.day} &#176;C</div>
           </div>
         `;
       }
     });
 
-    weatherForecastEl.innerHTML = otherDayForecast;
+    previsionTiempoEl.innerHTML = previsionRestoDias;
 }
