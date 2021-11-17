@@ -1,0 +1,67 @@
+{
+  "name": "jsl_weather_app",
+  "version": "0.1.0",
+  "description": "Aplicacion meteorologica - tutorial",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "lint": "eslint --fix src/**/*.{js,jsx}",
+    "format": "prettier --write \"*.{js,jsx,json,css}\""
+  },
+  "keywords": [
+    "parcel",
+    "react",
+    "weather"
+  ],
+  "repository": "git+https://github.com/jslworks/weather-app-tuto.git",
+  "author": "jslworks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jslworks/weather-app-tuto/issues"
+  },
+  "homepage": "https://github.com/jslworks/weather-app-tuto#readme",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "parcel-bundler": "^1.12.3",
+    "prettier": "1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run lint"
+    ],
+    "src/**/*.{js,jsx,json,css,scss}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "linebreak-style": "off"
+    }
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "semi": true
+  }
+}
